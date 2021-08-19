@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin LibraryManagementCore</title>
+
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap4/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/paper-dashboard/dist/css/paper-dashboard.min.css?v=2.0.1" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap4/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/lib/paper-dashboard/dist/css/paper-dashboard.min.css?v=2.0.1" />
+
+    </environment>
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="~/css/adminStyle.css"  />
+
+
+</head>
+<body style="background-color:#fec8c8">
+    <!--START-->
+
+    <div class="wrapper ">
+        <partial name="~/Areas/Admin/Views/Shared/_SidebarPartial.cshtml" />
+        
+        <div class="main-panel">
+            <!-- Navbar -->
+            <partial name="~/Areas/Admin/Views/Shared/_HeaderNavbarPartial.cshtml" />
+            <!-- End Navbar -->
+            <div class="content">
+                @RenderBody()
+                
+            </div>
+
+
+            <partial name="~/Areas/Admin/Views/Shared/_FooterPartial.cshtml" />
+        </div>
+    </div>
+
+
+    <!--END-->
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/popper/dist/js/popper.min.js"></script>
+        <script src="~/lib/bootstrap4/dist/js/bootstrap.min.js"></script>
+
+
+        
+        <script src="~/lib/plugin/js/perfect-scrollbar.jquery.min.js"></script>
+        <!--  Google Maps Plugin    -->
+        @*<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>*@
+        <!-- Chart JS -->
+        <script src="~/lib/plugin/js/chartjs.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="~/lib/plugin/js/bootstrap-notify.js"></script>
+        @*<script src="~/lib/paper-dashboard/dist/js/paper-dashboard.min.js" type="text/javascript"></script>*@
+
+
+        <script src="~/js/adminScript.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="~/lib/popper/dist/js/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+
+
+       
+        <script src="~/lib/plugin/js/perfect-scrollbar.jquery.min.js"></script>
+        <!--  Google Maps Plugin    -->
+        @*<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>*@
+        <!-- Chart JS -->
+        <script src="~/lib/plugin/js/chartjs.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="~/lib/plugin/js/bootstrap-notify.js"></script>
+        @*<script src="~/lib/paper-dashboard/dist/js/paper-dashboard.min.js" type="text/javascript"></script>*@
+
+
+        <script src="~/js/adminScript.js" asp-append-version="true"></script>
+    </environment>
+    <script>
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+          //  demo.initChartsPages();
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

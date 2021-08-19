@@ -1,0 +1,124 @@
+﻿@using LibraryBusinessEntities;
+
+@model LibraryManagementCore.Areas.Admin.Models.BookViewModel
+@{
+    ViewData["Title"] = "Index";
+
+    List<LibraryAssets> ListLibraryAssets = (List<LibraryAssets>)ViewBag.ListBooks;
+}
+
+
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+
+    <script>
+        $(function () {
+            $('#tblListBooks').DataTable();
+
+            $('body').on("submit", "#AddEditBook", function (e) {
+            //$('#btnSubmitBookForm').live('click', function (e) {
+           // $("#AddEditBook").submit(function (e) {
+                debugger;
+                e.preventDefault();
+                if (!$('#AddEditBook').valid()) { return false; }
+                var formAction = $(this).attr("action");
+                var fdata = new FormData(document.querySelector('#AddEditBook'));
+                //var fileInput = $('#uploadfile')[0];
+                //var file = fileInput.files[0];
+                //fdata.append("file", file);
+                $.ajax({
+                    type: 'post',
+                    url: formAction,
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    data: fdata,
+                    processData: false,
+                    contentType: false
+                }).done(function (result) {
+                    console.log(result);
+                    ShowMessage(result, "dvMessage");
+                    if (result.status > 0) {
+                        $('#BookId').val(result.data.bookId);
+                        $('#reloadBooks').trigger('click');
+                    } else {
+
+                    }
+                });
+            });
+            //editBook
+            $('#reloadBooks').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: "/Admin/Books/ReloadLibraryAssets",
+                    //headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                   // data: fdata,
+                    processData: false,
+                    contentType: false
+                }).done(function (result) {
+                    $('#dvListBooks').html(result);
+                    $('#tblListBooks').DataTable();
+                    
+                });
+            })
+
+            $('body').on('click', '.editBook', function (e) {
+                e.preventDefault();
+                var BookId = $(this).attr('data-bookid'); 
+                $.ajax({
+                    type: 'post',
+                    url: "/Admin/Books/LoadEditBookFormDetails",
+                    //headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    data: { BookId: BookId },
+                    // processData: false,
+                    // contentType: false
+                }).done(function (result) {
+                    $('#dvAddEditBook').html(result);
+                });
+            });
+             
+
+
+
+        })
+    </script>
+}
+<h2>Books Admin</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-user" id="dvAddEditBook">
+            @{await Html.RenderPartialAsync("_AddEditBookPartial", Model); }
+            @*<div class="card-header">
+            <h5 class="card-title">Add Edit Book</h5>
+        </div>
+        <div class="card-body" >
+            @{await Html.RenderPartialAsync("_AddEditBookPartial", Model); }
+        </div>*@
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8">
+        <div class="card card-user">
+            <div class="card-header">
+                <h5 class="card-title">List of Books &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-refresh" aria-hidden="true" id="reloadBooks" style="font-size: 2rem; cursor: pointer;"></i></h5>
+                
+            </div>
+            <div class="card-body" id="dvListBooks">
+
+                @{await Html.RenderPartialAsync("_ListBooksPartial", ListLibraryAssets); }
+
+            </div>
+        </div>
+    </div>
+</div>

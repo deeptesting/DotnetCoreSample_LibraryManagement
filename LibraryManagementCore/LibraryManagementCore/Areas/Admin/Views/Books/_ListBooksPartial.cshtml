@@ -1,0 +1,36 @@
+﻿@model List<LibraryBusinessEntities.LibraryAssets>
+
+<table id="tblListBooks" class="display" style="width:100%">
+    <thead>
+        <tr style="background-color:#eaeaea">
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th style="color:#16999c">@item.BookId</th>
+                <th style="color:#601212">@item.BookDetails.BookName</th>
+                <th>@item.BookDetails.Author</th>
+                <th>@item.Quantity</th>
+                <th><i class="fa fa-pencil-square-o editBook" aria-hidden="true" style="font-size:1.3rem;cursor:pointer" data-bookid="@item.BookId"></i></th>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr style="background-color:#eaeaea">
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
+</table>
+
+ 

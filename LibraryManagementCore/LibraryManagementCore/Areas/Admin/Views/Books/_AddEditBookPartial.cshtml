@@ -1,0 +1,62 @@
+﻿@model LibraryManagementCore.Areas.Admin.Models.BookViewModel
+
+<div class="card-header">
+    <h5 class="card-title" id="bkEditHeading">@((string.IsNullOrEmpty(Model.BookId))?"Add Book":"Edit Book")</h5>
+</div>
+<div class="card-body">
+   
+    <form asp-controller="Books" asp-action="AddEdit" method="post" id="AddEditBook">
+        <div class="row">
+            <div class="col-md-6 pr-1">
+                <div class="form-group">
+                    <label>Book ID</label>
+                    <input type="text" class="form-control"  asp-for="BookId" placeholder="Book ID" style="font-weight: 800; color: #00674f;">
+                    <span asp-validation-for="BookId" class="validation-error"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 pr-1">
+                <div class="form-group">
+                    <label>Book Name</label>
+                    <input type="text" class="form-control" asp-for="BookName" placeholder="Book Name">
+                    <span asp-validation-for="BookName" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pr-1">
+                <div class="form-group">
+                    <label>Book Author</label>
+                    <input type="text" class="form-control" asp-for="Author" placeholder="Book Author">
+                    <span asp-validation-for="Author" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pr-1">
+                <div class="form-group">
+                    <label>Book Quantity</label>
+                    <input type="number" class="form-control" asp-for="Quantity">
+                    <span asp-validation-for="Quantity" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="update ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round" id="btnSubmitBookForm"> @((string.IsNullOrEmpty(Model.BookId)) ? "Insert" : "Update")</button>
+                <button class="btn btn-dark btn-round" onclick="document.getElementById('AddEditBook').reset(); document.getElementById('bkEditHeading').innerHTML = 'Add Book';">Clear form</button>
+            </div>
+        </div>
+
+        <div class="row" id="dvMessage">
+            @*<div class="update col-md-10 ml-auto mr-auto msg-info msg-green">
+            Successfully inserted  <i class="fa fa-times" id="closeMsg" aria-hidden="true" style="font-size: 1.2rem;font-weight: 400;float: right;"></i>
+        </div>*@
+        </div>
+
+    </form>
+</div>
+
